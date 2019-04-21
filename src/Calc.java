@@ -1,4 +1,5 @@
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 import java.awt.*;
 
 public class Calc extends javax.swing.JFrame {
@@ -74,10 +75,39 @@ public class Calc extends javax.swing.JFrame {
         this.add(eightButton);
         this.add(nineButton);
 
+        equalsButton.setBackground(Color.cyan);
+        equalsButton.setForeground(Color.black);
+        equalsButton.setBorder(new LineBorder(Color.black, 1));
+        cButton.setBackground(Color.red);
+        cButton.setForeground(Color.white);
+        cButton.setBorder(new LineBorder(Color.black, 1));
+        percentageButton.setBackground(Color.darkGray);
+        percentageButton.setForeground(Color.white);
+        percentageButton.setBorder(new LineBorder(Color.black, 1));
+        deleteButton.setBackground(Color.darkGray);
+        deleteButton.setForeground(Color.white);
+        deleteButton.setBorder(new LineBorder(Color.black, 1));
+        subtractionButton.setBackground(Color.darkGray);
+        subtractionButton.setForeground(Color.white);
+        subtractionButton.setBorder(new LineBorder(Color.black, 1));
+        sumButton.setBackground(Color.darkGray);
+        sumButton.setForeground(Color.white);
+        sumButton.setBorder(new LineBorder(Color.black, 1));
+        divisionButton.setBackground(Color.darkGray);
+        divisionButton.setForeground(Color.white);
+        divisionButton.setBorder(new LineBorder(Color.black, 1));
+        multiplicationButton.setBackground(Color.darkGray);
+        multiplicationButton.setForeground(Color.white);
+        multiplicationButton.setBorder(new LineBorder(Color.black, 1));
+        textField.setBorder(new LineBorder(Color.black, 1));
+
+
+
         this.setSize(200, 330);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE );
         this.setLayout(null);
         this.setVisible(true);
+        setTitle("Calculator");
 
 
         sumButton.addActionListener(e -> {
