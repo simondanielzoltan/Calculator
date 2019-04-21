@@ -7,18 +7,16 @@ public class Calc extends javax.swing.JFrame {
     String operator="null";
 
 
-
-
     JButton sumButton = new JButton("+");
-    JButton negButton = new JButton("-");
-    JButton perButton = new JButton("/");
-    JButton starButton = new JButton("*");
-    JButton eqButton = new JButton("=");
+    JButton subtractionButton = new JButton("-");
+    JButton divisionButton = new JButton("/");
+    JButton multiplicationButton = new JButton("*");
+    JButton equalsButton = new JButton("=");
     JButton commaButton = new JButton(",");
-    JButton persButton = new JButton("%");
+    JButton percentageButton = new JButton("%");
     JButton cButton = new JButton("C");
-    JButton delButton = new JButton("<");
-    JButton nullButton = new JButton("0");
+    JButton deleteButton = new JButton("<");
+    JButton zeroButton = new JButton("0");
     JButton oneButton = new JButton("1");
     JButton twoButton = new JButton("2");
     JButton threeButton = new JButton("3");
@@ -33,18 +31,17 @@ public class Calc extends javax.swing.JFrame {
 
     public Calc() throws HeadlessException {
 
-
         textField.setBounds(0,0,200,50);
         sumButton.setBounds(150,50,50,50);
-        negButton.setBounds(150,100,50,50);
-        perButton.setBounds(150,150,50,50);
-        starButton.setBounds(150,200,50,50);
-        eqButton.setBounds(150,250,50,50);
+        subtractionButton.setBounds(150,100,50,50);
+        divisionButton.setBounds(150,150,50,50);
+        multiplicationButton.setBounds(150,200,50,50);
+        equalsButton.setBounds(150,250,50,50);
         commaButton.setBounds(100,250,50,50);
-        persButton.setBounds(50,50,50,50);
+        percentageButton.setBounds(50,50,50,50);
         cButton.setBounds(0,50,50,50);
-        delButton.setBounds(100,50,50,50);
-        nullButton.setBounds(0,250,100,50);
+        deleteButton.setBounds(100,50,50,50);
+        zeroButton.setBounds(0,250,100,50);
         oneButton.setBounds(0,200,50,50);
         twoButton.setBounds(50,200,50,50);
         threeButton.setBounds(100,200,50,50);
@@ -55,17 +52,18 @@ public class Calc extends javax.swing.JFrame {
         eightButton.setBounds(50,100,50,50);
         nineButton.setBounds(100,100,50,50);
 
+
         this.add(textField);
         this.add(sumButton);
-        this.add(negButton);
-        this.add(perButton);
-        this.add(starButton);
-        this.add(eqButton);
+        this.add(subtractionButton);
+        this.add(divisionButton);
+        this.add(multiplicationButton);
+        this.add(equalsButton);
         this.add(commaButton);
-        this.add(persButton);
+        this.add(percentageButton);
         this.add(cButton);
-        this.add(delButton);
-        this.add(nullButton);
+        this.add(deleteButton);
+        this.add(zeroButton);
         this.add(oneButton);
         this.add(twoButton);
         this.add(threeButton);
@@ -77,91 +75,58 @@ public class Calc extends javax.swing.JFrame {
         this.add(nineButton);
 
         this.setSize(200, 330);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE );
         this.setLayout(null);
         this.setVisible(true);
 
 
-
-
-
         sumButton.addActionListener(e -> {
-            if(!this.operator.equals("null")){
-                equals(operator);
-            }else {
-                this.result = Double.parseDouble(textField.getText());
-            }
-            this.operator = "+";
-            textField.setText("");
-
-
-
+            setOperation("+");
         });
 
-        negButton.addActionListener(e -> {
-            if(!this.operator.equals("null")){
-                equals(operator);
-            }else {
-                this.result = Double.parseDouble(textField.getText());
-            }
-            this.operator = "-";
-            textField.setText("");
-
+        subtractionButton.addActionListener(e -> {
+            setOperation("-");
         });
 
-        perButton.addActionListener(e -> {
-            if(!this.operator.equals("null")){
-                equals(operator);
-
-            }else {
-                this.result = Double.parseDouble(textField.getText());
-            }
-
-            this.operator = "/";
-            textField.setText("");
+        divisionButton.addActionListener(e -> {
+            setOperation("/");
         });
 
-        starButton.addActionListener(e -> {
-            if(!this.operator.equals("null")){
-                equals(operator);
-
-            }else {
-                this.result = Double.parseDouble(textField.getText());
-            }
-            this.operator = "*";
-            textField.setText("");
+        multiplicationButton.addActionListener(e -> {
+            setOperation("*");
         });
 
-        eqButton.addActionListener(e -> {
-            if(operator.equals("+")){
-                this.result=this.result+Double.parseDouble(textField.getText());
+        equalsButton.addActionListener(e -> {
+            equals(operator);
+            if(result % 1 == 0){
+                textField.setText(Integer.toString((int)result));
+            } else {
+                textField.setText(Double.toString(result));
             }
-            if(operator.equals("-")){
-                this.result=this.result-Double.parseDouble(textField.getText());
-            }
-            if(operator.equals("/")){
-                this.result=this.result/Double.parseDouble(textField.getText());
-            }
-            if(operator.equals("*")){
-                this.result=this.result*Double.parseDouble(textField.getText());
-            }
+            this.operator = "null";
+            this.result = 0;
+        });
 
-            textField.setText(Double.toString(result));
-            this.operator="null";
-            this.result=0;
-
+        percentageButton.addActionListener(e -> {
+            equals(operator);
+            result *= 100;
+            if(result % 1 == 0){
+                textField.setText(Integer.toString((int)result));
+            } else {
+                textField.setText(Double.toString(result));
+            }
+            this.operator = "null";
+            this.result = 0;
         });
 
         cButton.addActionListener(e -> {
-            this.operator="null";
-            this.result=0;
-
+            this.operator = "null";
+            this.result = 0;
             textField.setText("");
         });
 
 
-
-
-        nullButton.addActionListener(e -> {
+        zeroButton.addActionListener(e -> {
             textField.setText(textField.getText()+"0");
         });
 
@@ -202,36 +167,44 @@ public class Calc extends javax.swing.JFrame {
         });
 
         commaButton.addActionListener(e -> {
-            if(!operator.equals(".")) {
+            if (textField.getText().isEmpty()){
+                textField.setText(textField.getText() + "0.");
+            } else if(!textField.getText().contains(".")){
                 textField.setText(textField.getText() + ".");
-                operator = ".";
             }
+
         });
 
-        delButton.addActionListener(e -> {
+        deleteButton.addActionListener(e -> {
             if(!textField.getText().equals("")){
                 String str=textField.getText();
                 textField.setText(str.substring(0, str.length() - 1));
             }
         });
-
-
-
     }
 
+    private void setOperation(String symbol){
+        if(!this.operator.equals("null")){
+            equals(operator);
+        } else {
+            this.result = Double.parseDouble(textField.getText());
+        }
+        this.operator = symbol;
+        textField.setText("");
+    }
 
     private void equals(String operator){
         if(operator.equals("+")){
-            this.result =this.result +Double.valueOf(textField.getText());
+            this.result += Double.valueOf(textField.getText());
         }
         if(operator.equals("-")){
-            this.result =this.result -Double.parseDouble(textField.getText());
+            this.result -= Double.parseDouble(textField.getText());
         }
         if(operator.equals("/")){
-            this.result =this.result /Double.parseDouble(textField.getText());
+            this.result /= Double.parseDouble(textField.getText());
         }
         if(operator.equals("*")){
-            this.result =this.result *Double.parseDouble(textField.getText());
+            this.result *= Double.parseDouble(textField.getText());
         }
     }
 }
